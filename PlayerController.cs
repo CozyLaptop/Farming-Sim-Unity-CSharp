@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float baseSpeed = 1.0f;
-    public Vector3 movementDirection;
+    private float baseSpeed = 2.0f;
+    public Vector2 movementDirection;
     public float movementSpeed;
 
     private Rigidbody2D rb;
     private Animator anim;
     private bool playerMoving;
-    private Vector3 lastMove;
+    private Vector2 lastMove;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
         anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
 
-        movementDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         movementSpeed = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         movementDirection.Normalize();
 
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             //transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0f, 0f));
             playerMoving = true;
-            lastMove = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+            lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
             rb.velocity = movementDirection * movementSpeed * baseSpeed;
         }
 
@@ -43,15 +43,15 @@ public class PlayerController : MonoBehaviour
         {
             //transform.Translate(new Vector3(0f, Input.GetAxisRaw("Vertical") * speed * Time.deltaTime, 0f));
             playerMoving = true;
-            lastMove = new Vector3(0f, 0f, Input.GetAxisRaw("Vertical"));
+            lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
             rb.velocity = movementDirection * movementSpeed * baseSpeed;
         }
         if (playerMoving == false)
         {
-            rb.velocity = new Vector3(0, 0, 0);
+            rb.velocity = new Vector2(0, 0);
         }
         anim.SetBool("PlayerMoving", playerMoving);
         anim.SetFloat("LastMoveX", lastMove.x);
-        anim.SetFloat("LastMoveY", lastMove.z);
+        anim.SetFloat("LastMoveY", lastMove.y);
     }
 }

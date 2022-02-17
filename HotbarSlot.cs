@@ -7,24 +7,34 @@ public class HotbarSlot : MonoBehaviour
 {
     private Sprite slotSprite;
     private Text quantity;
-    private string slotNumber;
+    private Text slotNumber;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         slotSprite = transform.GetChild(0).gameObject.GetComponent<Image>().sprite;
         quantity = transform.GetChild(1).gameObject.GetComponent<Text>();
-
-        quantity.text = "200";
-    }
-    void Start()
-    {
-        
+        slotNumber = transform.GetChild(2).gameObject.GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public Sprite getSprite()
     {
-        
+        return slotSprite;
+    }
+    public void setSprite(Sprite sprite)
+    {
+        this.slotSprite = sprite;
+    }
+    public Text getSlotNumber()
+    {
+        return slotNumber;
+    }
+    private void setSlotNumber(int slotNumber)
+    {
+        // This should be set from HotBar Script
+        this.slotNumber.text = slotNumber.ToString();
+    }
+    private void setQuantity(int quantity)
+    {
+        this.quantity.text = quantity.ToString();
     }
 }

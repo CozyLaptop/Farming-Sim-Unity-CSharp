@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float baseSpeed = 5.0f;
-    public Vector2 movementDirection;
-    public float movementSpeed;
+    private Vector2 movementDirection;
+    private float movementSpeed;
 
     private Rigidbody2D rb;
     private Animator anim;

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FarmManager : MonoBehaviour
 {
+    public Sprite sprite;
+    private Texture2D icon;
+
     void OnGUI()
     {
-        // Starts an area to draw elements
-        GUILayout.BeginArea(new Rect(10, 10, 100, 100));
-        GUILayout.Button("Click me");
-        GUILayout.Button("Or me");
-        GUILayout.EndArea();
+        icon = sprite.texture;
+        GUI.Box(new Rect(10, 10, 20, 20), new GUIContent("1", icon));
+        //GUI.Label(new Rect(10, 40, 100, 20), GUI.tooltip);
     }
 }

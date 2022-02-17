@@ -28,9 +28,9 @@ public class HotbarSlot : MonoBehaviour
     {
         return slotNumber;
     }
-    private void setSlotNumber(int slotNumber)
+    public void setSlotNumber(int slotNumber)
     {
-        // This should be set from HotBar Script
+        // This is set from HotBar Script
         this.slotNumber.text = slotNumber.ToString();
     }
     private void setQuantity(int quantity)

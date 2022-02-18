@@ -5,22 +5,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 currentLocation;
+    private PlayerInventory playerInventory;
+
     private float baseSpeed = 5.0f;
     private Vector2 movementDirection;
     private float movementSpeed;
-
     private Vector2 playerPosition;
 
     private Rigidbody2D rb;
     private Animator anim;
     private bool playerMoving;
     private Vector2 lastMove;
+
     RaycastHit2D hitInfo;
 
 // Start is called before the first frame update
 void Start()
     {
+        playerInventory = new PlayerInventory();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -37,7 +39,6 @@ void Start()
 
         if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
         {
-            //transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0f, 0f));
             playerMoving = true;
             lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
             rb.velocity = movementDirection * movementSpeed * baseSpeed;
@@ -45,7 +46,6 @@ void Start()
 
         if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
         {
-            //transform.Translate(new Vector3(0f, Input.GetAxisRaw("Vertical") * speed * Time.deltaTime, 0f));
             playerMoving = true;
             lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
             rb.velocity = movementDirection * movementSpeed * baseSpeed;
@@ -66,11 +66,16 @@ void Start()
             RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hitInfo.collider != null)
             {
-                Debug.Log("Hit!");
-                Debug.Log(hitInfo.transform.name);
                 if (Vector2.Distance(transform.position, hitInfo.transform.position) < 1)
                 {
-                    Debug.Log("Youre close enough to pick this up!");
+                    if (hitInfo.transform.GetComponent<GroundPickableItem>())
+                    {
+                        int id = hitInfo.transform.GetComponent<GroundPickableItem>().id;
+                        //Add to inventory
+                        playerInventory.addToInventory(ItemManager.getItem(id), 1);
+                        Destroy(hitInfo.transform.gameObject);
+                        playerInventory.showInventory();
+                    }
                 }
             }
 

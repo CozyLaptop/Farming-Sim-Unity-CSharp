@@ -27,6 +27,12 @@ public class PlayerInventory
         {
             playerInventoryAmounts[item]++;
         }
-        
+    }
+    public void showInventory()
+    {
+        foreach (Item item in playerInventoryOrder)
+        {
+            Debug.Log(item.getItemName());
+        }
     }
 }

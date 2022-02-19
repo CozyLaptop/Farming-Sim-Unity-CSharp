@@ -18,10 +18,8 @@ public class PlayerController : MonoBehaviour
     private bool playerMoving;
     private Vector2 lastMove;
 
-    RaycastHit2D hitInfo;
-
-// Start is called before the first frame update
-void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         playerInventory = new PlayerInventory();
         rb = GetComponent<Rigidbody2D>();
@@ -73,7 +71,7 @@ void Start()
                     if (hitInfo.transform.GetComponent<GroundPickableItem>())
                     {
                         int id = hitInfo.transform.GetComponent<GroundPickableItem>().id;
-                        playerInventory.addToInventory(ItemManager.getItem(id), 1);
+                        pickupItem(id);
                         Destroy(hitInfo.transform.gameObject);
                     }
                 }
@@ -81,23 +79,22 @@ void Start()
 
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<DroppedItem>())
         {
             DroppedItem droppedItem = collision.gameObject.GetComponent<DroppedItem>();
-            Debug.Log(ItemManager.getItem(droppedItem.id).getItemName());
-            playerInventory.addToInventory(ItemManager.getItem(droppedItem.id), droppedItem.amount);
-            if(playerInventory.getItemCount() <= 10)
-            {
-                hotbar.updateHotbar(playerInventory.getInventoryList());
-            }
+            pickupItem(droppedItem.id);
             Destroy(collision.gameObject);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void pickupItem(int id)
     {
-
+        playerInventory.addToInventory(ItemManager.getItem(id), 1);
+        if (playerInventory.getInventoryList().Count <= 10)
+        {
+            hotbar.updateHotbar(playerInventory.getInventoryList(), playerInventory.getPlayerInventoryAmounts());
+        }
     }
     public Vector2 getPlayerPosition()
     {

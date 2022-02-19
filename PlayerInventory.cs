@@ -19,6 +19,7 @@ public class PlayerInventory
         //Add key and amount
         if (!playerInventoryAmounts.ContainsKey(item))
         {
+            Debug.Log("Picked up " + item.getItemName());
             playerInventoryAmounts.Add(item, amount);
             playerInventoryOrder.Add(item);
         }
@@ -26,6 +27,7 @@ public class PlayerInventory
         else
         {
             playerInventoryAmounts[item]++;
+            Debug.Log("You now have " + playerInventoryAmounts[item] + " " + item.getItemName());
         }
     }
     public void showInventory()
@@ -43,5 +45,13 @@ public class PlayerInventory
     {
         //return playerInventoryOrder.GetRange(0,10);
         return playerInventoryOrder;
+    }
+    public List<Item> getInventoryList10()
+    {
+        return playerInventoryOrder.GetRange(0,10);
+    }
+    public Dictionary<Item, int> getPlayerInventoryAmounts()
+    {
+        return playerInventoryAmounts;
     }
 }

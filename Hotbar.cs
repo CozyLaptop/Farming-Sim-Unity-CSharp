@@ -27,17 +27,22 @@ public class Hotbar : MonoBehaviour
             }
         }
     }
-    public void updateHotbar(List<Item> items)
+    public void updateHotbar(List<Item> inventoryList, Dictionary<Item, int> playerInventoryDict)
     {
         int count = 0;
         foreach (HotbarSlot hotbarSlot in GetComponentsInChildren<HotbarSlot>())
         {
-            if (count < items.Count)
+            if (count < inventoryList.Count)
             {
-                hotbarSlot.setSprite(items[count].getSprite());
+                hotbarSlot.setSprite(inventoryList[count].getSprite());
+                hotbarSlot.setQuantity(playerInventoryDict[inventoryList[count]]);
+                count++;
             }
-            count++;
         }
+    }
+    public void updateHotbarSlotAmount(int index, Item item)
+    {
+
     }
 
     // Update is called once per frame

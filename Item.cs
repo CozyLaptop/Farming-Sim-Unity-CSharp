@@ -29,4 +29,8 @@ public class Item
     {
         return id;
     }
+    public Sprite getSprite()
+    {
+        return this.sprite;
+    }
 }

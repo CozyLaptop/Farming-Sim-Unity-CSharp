@@ -12,14 +12,14 @@ public class Item
     {
         this.id = id;
         this.itemName = name;
-        this.sprite = Resources.Load("ItemSprites/" + itemName) as Sprite;
+        this.sprite = Resources.Load<Sprite>("ItemSprites/" + itemName);
     }
 
     public Item(int id)
     {
         this.id = id;
         this.itemName = ItemManager.getItemName(id);
-        this.sprite = Resources.Load("ItemSprites/" + itemName) as Sprite;
+        this.sprite = Resources.Load<Sprite>("ItemSprites/" + itemName);
     }
     public string getItemName()
     {

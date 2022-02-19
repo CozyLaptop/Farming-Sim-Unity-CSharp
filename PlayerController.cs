@@ -68,7 +68,7 @@ void Start()
             RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hitInfo.collider != null)
             {
-                if (Vector2.Distance(transform.position, hitInfo.transform.position) < 1)
+                if (Vector2.Distance(transform.position, hitInfo.transform.position) < 2)
                 {
                     if (hitInfo.transform.GetComponent<GroundPickableItem>())
                     {
@@ -86,8 +86,9 @@ void Start()
         if (collision.gameObject.GetComponent<DroppedItem>())
         {
             DroppedItem droppedItem = collision.gameObject.GetComponent<DroppedItem>();
+            Debug.Log(ItemManager.getItem(droppedItem.id).getItemName());
             playerInventory.addToInventory(ItemManager.getItem(droppedItem.id), droppedItem.amount);
-            if(playerInventory.getItemCount() < 10)
+            if(playerInventory.getItemCount() <= 10)
             {
                 hotbar.updateHotbar(playerInventory.getInventoryList());
             }

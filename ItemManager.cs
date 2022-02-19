@@ -9,15 +9,8 @@ public static class ItemManager
 
     public static void initializeItemDatabase()
     {
-        itemDatabase.Add(1, new Item(1, "salmonberry"));
+        itemDatabase.Add(1, new Item(1, "Salmonberry"));
     }
-
-    //public ItemManager()
-    //{
-    //    //itemDatabase = new Dictionary<int, Item>();
-    //    itemDatabase.Add(1, new Item(1, salmonberry));
-    //}
-
     public static Item getItem(int id)
     {
         return itemDatabase[id];

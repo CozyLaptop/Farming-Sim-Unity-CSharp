@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerInventory playerInventory;
+    private Hotbar hotbar;
 
     private float baseSpeed = 5.0f;
     private Vector2 movementDirection;
@@ -25,6 +26,7 @@ void Start()
         playerInventory = new PlayerInventory();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
     }
 
     void FixedUpdate()
@@ -71,15 +73,30 @@ void Start()
                     if (hitInfo.transform.GetComponent<GroundPickableItem>())
                     {
                         int id = hitInfo.transform.GetComponent<GroundPickableItem>().id;
-                        //Add to inventory
                         playerInventory.addToInventory(ItemManager.getItem(id), 1);
                         Destroy(hitInfo.transform.gameObject);
-                        playerInventory.showInventory();
                     }
                 }
             }
 
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<DroppedItem>())
+        {
+            DroppedItem droppedItem = collision.gameObject.GetComponent<DroppedItem>();
+            playerInventory.addToInventory(ItemManager.getItem(droppedItem.id), droppedItem.amount);
+            if(playerInventory.getItemCount() < 10)
+            {
+                hotbar.updateHotbar(playerInventory.getInventoryList());
+            }
+            Destroy(collision.gameObject);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
     }
     public Vector2 getPlayerPosition()
     {

@@ -35,4 +35,13 @@ public class PlayerInventory
             Debug.Log(item.getItemName());
         }
     }
+    public int getItemCount()
+    {
+        return playerInventoryOrder.Count;
+    }
+    public List<Item> getInventoryList()
+    {
+        //return playerInventoryOrder.GetRange(0,10);
+        return playerInventoryOrder;
+    }
 }

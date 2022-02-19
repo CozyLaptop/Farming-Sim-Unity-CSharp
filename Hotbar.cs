@@ -27,6 +27,18 @@ public class Hotbar : MonoBehaviour
             }
         }
     }
+    public void updateHotbar(List<Item> items)
+    {
+        int count = 0;
+        foreach (HotbarSlot hotbarSlot in GetComponentsInChildren<HotbarSlot>())
+        {
+            if (count < items.Count)
+            {
+                hotbarSlot.setSprite(items[count].getSprite());
+            }
+            count++;
+        }
+    }
 
     // Update is called once per frame
     void Update()

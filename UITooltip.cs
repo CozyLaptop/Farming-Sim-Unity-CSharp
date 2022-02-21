@@ -20,6 +20,10 @@ public class UITooltip : MonoBehaviour
     {
         spriteRenderer.sprite = player.getSpriteOfEquippedItem();
     }
+    public void OnChangeHotbar()
+    {
+        spriteRenderer.sprite = player.getSpriteOfEquippedItem();
+    }
     public void setSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;

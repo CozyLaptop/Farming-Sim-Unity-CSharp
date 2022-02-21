@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private GameObject uITooltip;
+
     private PlayerInventory playerInventory;
     private Hotbar hotbar;
 
@@ -23,13 +25,14 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiShippingBoxHover"), new Vector3(100, 100, 0), Quaternion.identity);
+        uITooltip.SetActive(false);
+        hotbar.setUIToolTip(GetUITooltip());
     }
     private void Awake()
     {
         playerInventory = new PlayerInventory();
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
-
-
     }
     void FixedUpdate()
     {
@@ -155,18 +158,16 @@ public class Player : MonoBehaviour
     {
         return playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
     }
-    //public 
-    //public void showShippingBoxPopup(GameObject uiPopup)
-    //{
-    //    //if(gameObject.Fin)
-    //    //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //    //worldPosition.z = 0;
-    //    uiPopup.GetComponent<SpriteRenderer>().sprite = playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
-    //    Instantiate(uiPopup, new Vector3(0,0,0), Quaternion.identity);
-    //}
-    //public void destroyShippingBoxPopup()
-    //{
-    //    GameObject.Find("uiShippingBoxHover").SetActive(false);
-    //}
-
+    public void setUIEnabled()
+    {
+        uITooltip.SetActive(true);
+    }
+    public void setUIDisable()
+    {
+        uITooltip.SetActive(false);
+    }
+    public UITooltip GetUITooltip()
+    {
+        return uITooltip.GetComponent<UITooltip>();
+    }
 }

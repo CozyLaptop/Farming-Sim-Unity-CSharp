@@ -34,9 +34,13 @@ public class HotbarSlot : MonoBehaviour
         imageComponentForSprite.enabled = true;
         imageComponentForSprite.sprite = sprite;
     }
-    public Text getSlotNumber()
+    public int getSlotNumber()
     {
-        return slotNumber;
+        if(slotNumber.text == "0")
+        {
+            return 9;
+        } else
+        return int.Parse(slotNumber.text) - 1;
     }
     public void setSlotNumber(int slotNumber)
     {

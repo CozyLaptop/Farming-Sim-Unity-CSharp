@@ -27,7 +27,6 @@ public class PlayerInventory
         else
         {
             playerInventoryAmounts[item]++;
-            Debug.Log("You now have " + playerInventoryAmounts[item] + " " + item.getItemName());
         }
     }
     public void showInventory()
@@ -53,5 +52,15 @@ public class PlayerInventory
     public Dictionary<Item, int> getPlayerInventoryAmounts()
     {
         return playerInventoryAmounts;
+    }
+    public Sprite getSpriteFromIndex(int index)
+    {
+        try
+        {
+            return playerInventoryOrder[index].getSprite();
+        }
+        catch {
+            return Resources.Load<Sprite>("ItemSprites/emptySprite");
+        }
     }
 }

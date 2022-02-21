@@ -18,18 +18,19 @@ public class Player : MonoBehaviour
     private bool playerMoving;
     private Vector2 lastMove;
 
-    private int currentlyEquippedSlot;
-
     // Start is called before the first frame update
     void Start()
     {
-        playerInventory = new PlayerInventory();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
-        currentlyEquippedSlot = 1;
     }
+    private void Awake()
+    {
+        playerInventory = new PlayerInventory();
+        hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
 
+
+    }
     void FixedUpdate()
     {
         playerMoving = false;
@@ -64,7 +65,6 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        //
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             hotbar.toggleActiveSlot(1);
@@ -151,12 +151,22 @@ public class Player : MonoBehaviour
     {
         return transform.position;
     }
-    public void showShippingBoxPopup(GameObject uiPopup)
+    public Sprite getSpriteOfEquippedItem()
     {
-        //if(currentlyEquippedSlot != null)
-        //{
-            //uiPopup.GetComponent<SpriteRenderer>().sprite = currentlyEquippedItem.getSprite();
-        //}
+        return playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
     }
+    //public 
+    //public void showShippingBoxPopup(GameObject uiPopup)
+    //{
+    //    //if(gameObject.Fin)
+    //    //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    //worldPosition.z = 0;
+    //    uiPopup.GetComponent<SpriteRenderer>().sprite = playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
+    //    Instantiate(uiPopup, new Vector3(0,0,0), Quaternion.identity);
+    //}
+    //public void destroyShippingBoxPopup()
+    //{
+    //    GameObject.Find("uiShippingBoxHover").SetActive(false);
+    //}
 
 }

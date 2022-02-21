@@ -81,6 +81,21 @@ public class Hotbar : MonoBehaviour
             slot.setInactive();
         }
     }
+    public int getActiveSlot()
+    {
+        int activeSlotNumber = 99;
+        if (activeSlot)
+        {
+            foreach (HotbarSlot slot in hotbarSlots)
+            {
+                if (slot.isActive())
+                {
+                    activeSlotNumber = slot.getSlotNumber();
+                }
+            }
+        }
+        return activeSlotNumber;
+    }
 
     // Update is called once per frame
     void Update()

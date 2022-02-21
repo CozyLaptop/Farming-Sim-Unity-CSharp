@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private PlayerInventory playerInventory;
     private Hotbar hotbar;
@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private bool playerMoving;
     private Vector2 lastMove;
 
+    private int currentlyEquippedSlot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
+        currentlyEquippedSlot = 1;
     }
 
     void FixedUpdate()
@@ -61,6 +64,49 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        //
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            hotbar.toggleActiveSlot(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            hotbar.toggleActiveSlot(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            hotbar.toggleActiveSlot(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            hotbar.toggleActiveSlot(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            hotbar.toggleActiveSlot(5);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            hotbar.toggleActiveSlot(6);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            hotbar.toggleActiveSlot(7);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            hotbar.toggleActiveSlot(8);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            hotbar.toggleActiveSlot(9);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            hotbar.toggleActiveSlot(0);
+        }
+
+        //On click
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -74,9 +120,14 @@ public class PlayerController : MonoBehaviour
                         pickupItem(id);
                         Destroy(hitInfo.transform.gameObject);
                     }
+                    if (hitInfo.transform.GetComponent<ShippingBox>())
+                    {
+
+                        //currently equipped item will disapear from inventory
+                        //and go inside shipping box inventory
+                    }
                 }
             }
-
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -100,4 +151,12 @@ public class PlayerController : MonoBehaviour
     {
         return transform.position;
     }
+    public void showShippingBoxPopup(GameObject uiPopup)
+    {
+        //if(currentlyEquippedSlot != null)
+        //{
+            //uiPopup.GetComponent<SpriteRenderer>().sprite = currentlyEquippedItem.getSprite();
+        //}
+    }
+
 }

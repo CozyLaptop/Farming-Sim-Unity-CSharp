@@ -5,27 +5,34 @@ using UnityEngine.UI;
 
 public class HotbarSlot : MonoBehaviour
 {
-    private Sprite slotSprite;
+    bool activeSlot;
+    Color32 inactiveSlotColor = new Color32(159, 97, 47,255);
+    Color32 activeSlotColor = new Color32(130, 85, 48, 255);
+    
+    
     private Text quantity;
     private Text slotNumber;
+    private Image imageComponentForSprite;
     private Image imageComponent;
 
     private void Awake()
     {
-        imageComponent = transform.GetChild(0).gameObject.GetComponent<Image>();
-        slotSprite = transform.GetChild(0).gameObject.GetComponent<Image>().sprite;
+        //activeSlotColor = new Color(130, 85, 48);
+        activeSlot = false;
+        imageComponent = gameObject.GetComponent<Image>();
+        imageComponentForSprite = transform.GetChild(0).gameObject.GetComponent<Image>();
         quantity = transform.GetChild(1).gameObject.GetComponent<Text>();
         slotNumber = transform.GetChild(2).gameObject.GetComponent<Text>();
     }
 
     public Sprite getSprite()
     {
-        return slotSprite;
+        return imageComponentForSprite.sprite;
     }
     public void setSprite(Sprite sprite)
     {
-        imageComponent.enabled = true;
-        imageComponent.sprite = sprite;
+        imageComponentForSprite.enabled = true;
+        imageComponentForSprite.sprite = sprite;
     }
     public Text getSlotNumber()
     {
@@ -43,5 +50,24 @@ public class HotbarSlot : MonoBehaviour
     public void setQuantity(int quantity)
     {
         this.quantity.text = quantity.ToString();
+    }
+    public void removeQuantityNumber()
+    {
+        this.quantity.text = "";
+    }
+    public void setActive()
+    {
+        this.activeSlot = true;
+        imageComponent.color = activeSlotColor;
+        //
+    }
+    public void setInactive()
+    {
+        this.activeSlot = false;
+        imageComponent.color = inactiveSlotColor;
+    }
+    public bool isActive()
+    {
+        return activeSlot;
     }
 }

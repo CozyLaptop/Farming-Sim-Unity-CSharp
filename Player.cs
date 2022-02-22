@@ -20,16 +20,16 @@ public class Player : MonoBehaviour
     private bool playerMoving;
     private Vector2 lastMove;
 
+    private void Awake()
+    {
+        playerInventory = new PlayerInventory();
+        hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         //hotbar.setUIToolTip(GetUITooltip());
-    }
-    private void Awake()
-    {
-        playerInventory = new PlayerInventory();
-        hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
     }
     void FixedUpdate()
     {
@@ -152,6 +152,18 @@ public class Player : MonoBehaviour
     }
     public Sprite getSpriteOfEquippedItem()
     {
-        return playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
+       return playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
     }
+    //public void setUIEnabled()
+    //{
+    //    uITooltip.SetActive(true);
+    //}
+    //public void setUIDisable()
+    //{
+    //    uITooltip.SetActive(false);
+    //}
+    //public UITooltip GetUITooltip()
+    //{
+    //    return uITooltip.GetComponent<UITooltip>();
+    //}
 }

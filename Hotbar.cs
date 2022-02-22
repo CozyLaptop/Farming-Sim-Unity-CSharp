@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Hotbar : MonoBehaviour
 {
+    UITooltip uITooltip;
     bool activeSlot;
     HotbarSlot[] hotbarSlots;
 
-    private UITooltip uITooltip;
     private void Awake()
     {
         
     }
     void Start()
     {
-        uITooltip = FindObjectOfType<UITooltip>();
+        uITooltip = UIManager.Instance.getUITooltip().GetComponent<UITooltip>();
         hotbarSlots = GetComponentsInChildren<HotbarSlot>();
         setHotbarNumbers();
     }
@@ -79,7 +79,7 @@ public class Hotbar : MonoBehaviour
             activeSlot = true;
         }
         //Change ui popup sprite to the equipped item, blank if none
-        uITooltip.OnChangeHotbar();
+        uITooltip.gameObject.GetComponent<UITooltip>().OnChangeHotbar();
         
     }
     public void deactivateAllSlots()

@@ -19,14 +19,9 @@ public class GameManager : MonoBehaviour
 
         }
     }
+    private UIManager uIManager;
     private void Awake()
     {
         _instance = this;
-        Debug.Log("I'm awake");
     }
-    public void testMessage()
-    {
-        Debug.Log("I'm working");
-    }
-    // implement your Awake, Start, Update, or other methods here...
 }

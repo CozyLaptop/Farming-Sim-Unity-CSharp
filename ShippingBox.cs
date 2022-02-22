@@ -6,11 +6,9 @@ public class ShippingBox : MonoBehaviour
 {
     List<Item> items;
     Player player;
-    private UITooltip uITooltip;
 
     private void Start()
     {
-        uITooltip = FindObjectOfType<UITooltip>();
         player = FindObjectOfType<Player>();
         items = new List<Item>();
     }
@@ -26,11 +24,10 @@ public class ShippingBox : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        uITooltip.setActive();
-        //player.setUIEnabled();
+        UIManager.Instance.getUITooltip().SetActive(true);
     }
     private void OnMouseExit()
     {
-        uITooltip.disable();
+        UIManager.Instance.getUITooltip().SetActive(false);
     }
 }

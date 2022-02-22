@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private GameObject uITooltip;
-
     private PlayerInventory playerInventory;
     private Hotbar hotbar;
 
@@ -29,7 +27,6 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        //hotbar.setUIToolTip(GetUITooltip());
     }
     void FixedUpdate()
     {
@@ -154,16 +151,4 @@ public class Player : MonoBehaviour
     {
        return playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
     }
-    //public void setUIEnabled()
-    //{
-    //    uITooltip.SetActive(true);
-    //}
-    //public void setUIDisable()
-    //{
-    //    uITooltip.SetActive(false);
-    //}
-    //public UITooltip GetUITooltip()
-    //{
-    //    return uITooltip.GetComponent<UITooltip>();
-    //}
 }

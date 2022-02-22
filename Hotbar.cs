@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Hotbar : MonoBehaviour
 {
-    UITooltip uITooltip;
     bool activeSlot;
     HotbarSlot[] hotbarSlots;
 
@@ -15,7 +14,6 @@ public class Hotbar : MonoBehaviour
     }
     void Start()
     {
-        uITooltip = UIManager.Instance.getUITooltip().GetComponent<UITooltip>();
         hotbarSlots = GetComponentsInChildren<HotbarSlot>();
         setHotbarNumbers();
     }
@@ -79,7 +77,7 @@ public class Hotbar : MonoBehaviour
             activeSlot = true;
         }
         //Change ui popup sprite to the equipped item, blank if none
-        uITooltip.gameObject.GetComponent<UITooltip>().OnChangeHotbar();
+        UIManager.Instance.getUITooltip().OnChangeHotbar();
         
     }
     public void deactivateAllSlots()

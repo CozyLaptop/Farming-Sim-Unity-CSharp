@@ -29,9 +29,13 @@ public class UIManager : MonoBehaviour
         uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiMouseTooltip"), new Vector3(0, 0, 0), Quaternion.identity);
         uITooltip.SetActive(false);
     }
-
-    public GameObject getUITooltip()
+    private void Start()
     {
-        return uITooltip;
+
+    }
+
+    public UITooltip getUITooltip()
+    {
+        return uITooltip.GetComponent<UITooltip>();
     }
 }

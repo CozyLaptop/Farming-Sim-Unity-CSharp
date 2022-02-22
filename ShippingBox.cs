@@ -24,10 +24,10 @@ public class ShippingBox : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        UIManager.Instance.getUITooltip().SetActive(true);
+        UIManager.Instance.getUITooltip().gameObject.SetActive(true);
     }
     private void OnMouseExit()
     {
-        UIManager.Instance.getUITooltip().SetActive(false);
+        UIManager.Instance.getUITooltip().gameObject.SetActive(false);
     }
 }

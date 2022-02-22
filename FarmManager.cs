@@ -16,8 +16,6 @@ public class FarmManager : MonoBehaviour
         List <Tilemap> tilemaps = new List<Tilemap>(grid.gameObject.GetComponentsInChildren<Tilemap>());
         groundTilemap = tilemaps[0];
 
-
-
         //Setup item database
         ItemManager.initializeItemDatabase();
 
@@ -26,9 +24,6 @@ public class FarmManager : MonoBehaviour
     }
     private void Start()
     {
-        //Setup UI Tooltip and disable
-        GameObject uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiMouseTooltip"), new Vector3(0, 0, 0), Quaternion.identity);
-        uITooltip.SetActive(false);
     }
     private void spawnFarm()
     {

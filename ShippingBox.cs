@@ -6,11 +6,11 @@ public class ShippingBox : MonoBehaviour
 {
     List<Item> items;
     Player player;
-    private GameObject uiPopup;
-    
-    // Start is called before the first frame update
-    void Start()
+    private UITooltip uITooltip;
+
+    private void Start()
     {
+        uITooltip = FindObjectOfType<UITooltip>();
         player = FindObjectOfType<Player>();
         items = new List<Item>();
     }
@@ -26,18 +26,11 @@ public class ShippingBox : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        player.setUIEnabled();
+        uITooltip.setActive();
+        //player.setUIEnabled();
     }
     private void OnMouseExit()
     {
-        player.setUIDisable();
-    }
-    public void OnHotbarChange()
-    {
-        uiPopup.GetComponent<UITooltip>().setSprite(player.getSpriteOfEquippedItem());
-    }
-    public GameObject getUITooltip()
-    {
-        return uiPopup;
+        uITooltip.disable();
     }
 }

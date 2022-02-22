@@ -9,7 +9,10 @@ public class Hotbar : MonoBehaviour
     HotbarSlot[] hotbarSlots;
 
     private UITooltip uITooltip;
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         uITooltip = FindObjectOfType<UITooltip>();
@@ -75,6 +78,7 @@ public class Hotbar : MonoBehaviour
             hotbarSlots[slot].setActive();
             activeSlot = true;
         }
+        //Change ui popup sprite to the equipped item, blank if none
         uITooltip.OnChangeHotbar();
         
     }
@@ -99,15 +103,5 @@ public class Hotbar : MonoBehaviour
             }
         }
         return activeSlotNumber;
-    }
-    public void setUIToolTip(UITooltip uiToolTip)
-    {
-        this.uITooltip = uiToolTip;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

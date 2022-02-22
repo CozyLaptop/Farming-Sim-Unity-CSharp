@@ -20,14 +20,11 @@ public class Player : MonoBehaviour
     private bool playerMoving;
     private Vector2 lastMove;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiShippingBoxHover"), new Vector3(100, 100, 0), Quaternion.identity);
-        uITooltip.SetActive(false);
-        hotbar.setUIToolTip(GetUITooltip());
+        //hotbar.setUIToolTip(GetUITooltip());
     }
     private void Awake()
     {
@@ -109,7 +106,6 @@ public class Player : MonoBehaviour
             hotbar.toggleActiveSlot(0);
         }
 
-        //On click
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -157,17 +153,5 @@ public class Player : MonoBehaviour
     public Sprite getSpriteOfEquippedItem()
     {
         return playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
-    }
-    public void setUIEnabled()
-    {
-        uITooltip.SetActive(true);
-    }
-    public void setUIDisable()
-    {
-        uITooltip.SetActive(false);
-    }
-    public UITooltip GetUITooltip()
-    {
-        return uITooltip.GetComponent<UITooltip>();
     }
 }

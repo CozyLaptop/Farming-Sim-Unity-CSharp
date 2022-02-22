@@ -7,14 +7,19 @@ public class UITooltip : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Vector3 worldPosition;
     Player player;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+
     private void Awake()
     {
         player = FindObjectOfType<Player>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    public void setActive()
+    {
+        this.gameObject.SetActive(true);
+    }
+    public void disable()
+    {
+        this.gameObject.SetActive(false);
     }
     private void OnEnable()
     {

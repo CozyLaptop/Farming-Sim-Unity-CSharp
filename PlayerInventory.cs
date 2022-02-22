@@ -19,7 +19,6 @@ public class PlayerInventory
         //Add key and amount
         if (!playerInventoryAmounts.ContainsKey(item))
         {
-            Debug.Log("Picked up " + item.getItemName());
             playerInventoryAmounts.Add(item, amount);
             playerInventoryOrder.Add(item);
         }

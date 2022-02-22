@@ -11,12 +11,24 @@ public class FarmManager : MonoBehaviour
     public GameObject tree1;
     private void Awake()
     {
+        //Get grid and tilemap ready
         grid = FindObjectOfType<Grid>();
         List <Tilemap> tilemaps = new List<Tilemap>(grid.gameObject.GetComponentsInChildren<Tilemap>());
         groundTilemap = tilemaps[0];
-        //change each tilemap that is soil to random chance for spawn object
-        spawnFarm();
+
+
+
+        //Setup item database
         ItemManager.initializeItemDatabase();
+
+        //Spawn random objects on the farm
+        spawnFarm();
+    }
+    private void Start()
+    {
+        //Setup UI Tooltip and disable
+        GameObject uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiMouseTooltip"), new Vector3(0, 0, 0), Quaternion.identity);
+        uITooltip.SetActive(false);
     }
     private void spawnFarm()
     {

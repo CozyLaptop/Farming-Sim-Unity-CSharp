@@ -8,8 +8,10 @@ public class HotbarSlot : MonoBehaviour
     bool activeSlot;
     Color32 inactiveSlotColor = new Color32(159, 97, 47,255);
     Color32 activeSlotColor = new Color32(130, 85, 48, 255);
-    
-    
+    Sprite inactiveSlotSprite;
+    Sprite activeSlotSprite;
+
+
     private Text quantity;
     private Text slotNumber;
     private Image imageComponentForSprite;
@@ -17,12 +19,13 @@ public class HotbarSlot : MonoBehaviour
 
     private void Awake()
     {
-        //activeSlotColor = new Color(130, 85, 48);
         activeSlot = false;
         imageComponent = gameObject.GetComponent<Image>();
         imageComponentForSprite = transform.GetChild(0).gameObject.GetComponent<Image>();
         quantity = transform.GetChild(1).gameObject.GetComponent<Text>();
         slotNumber = transform.GetChild(2).gameObject.GetComponent<Text>();
+        inactiveSlotSprite = Resources.Load<Sprite>("UISprites/emptyhotbarslot");
+        activeSlotSprite = Resources.Load<Sprite>("UISprites/activehotbarslot");
     }
 
     public Sprite getSprite()
@@ -33,6 +36,10 @@ public class HotbarSlot : MonoBehaviour
     {
         imageComponentForSprite.enabled = true;
         imageComponentForSprite.sprite = sprite;
+    }
+    public void setSpriteToNone()
+    {
+        imageComponentForSprite.enabled = false;
     }
     public int getSlotNumber()
     {
@@ -53,7 +60,14 @@ public class HotbarSlot : MonoBehaviour
     }
     public void setQuantity(int quantity)
     {
-        this.quantity.text = quantity.ToString();
+        if(quantity == 1)
+        {
+            this.quantity.text = "";
+        }
+        else
+        {
+            this.quantity.text = quantity.ToString();
+        }
     }
     public void removeQuantityNumber()
     {
@@ -62,13 +76,12 @@ public class HotbarSlot : MonoBehaviour
     public void setActive()
     {
         this.activeSlot = true;
-        imageComponent.color = activeSlotColor;
-        //
+        imageComponent.sprite = activeSlotSprite;
     }
     public void setInactive()
     {
         this.activeSlot = false;
-        imageComponent.color = inactiveSlotColor;
+        imageComponent.sprite = inactiveSlotSprite;
     }
     public bool isActive()
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Hotbar : MonoBehaviour
 {
+    private Inventory playerInventory;
     bool activeSlot;
     HotbarSlot[] hotbarSlots;
 
@@ -16,6 +17,7 @@ public class Hotbar : MonoBehaviour
     {
         hotbarSlots = GetComponentsInChildren<HotbarSlot>();
         setHotbarNumbers();
+        playerInventory = GameObject.Find("Farmer").GetComponent<Player>().getInventory();
     }
 
     private void setHotbarNumbers()
@@ -35,17 +37,26 @@ public class Hotbar : MonoBehaviour
             hotbarSlot.removeQuantityNumber();
         }
     }
-    public void updateHotbar(List<Item> inventoryList, Dictionary<Item, int> playerInventoryDict)
+    public void updateHotbar()
     {
-        int count = 0;
+        //playerInventory.getInventoryList().Count;
+        int count = 1;
         foreach (HotbarSlot hotbarSlot in GetComponentsInChildren<HotbarSlot>())
         {
-            if (count < inventoryList.Count)
+            if(playerInventory.getItemCount() == 0)
             {
-                hotbarSlot.setSprite(inventoryList[count].getSprite());
-                hotbarSlot.setQuantity(playerInventoryDict[inventoryList[count]]);
+                hotbarSlot.setSpriteToNone();
+                hotbarSlot.removeQuantityNumber();
+                UIManager.Instance.getUITooltip().OnChangeHotbar();
+            }
+            if (playerInventory.getItemCount() >= count)
+            {
+                hotbarSlot.setSprite(playerInventory.getSpriteFromIndex(count - 1));
+                hotbarSlot.setQuantity(playerInventory.getIndividualItemCount(playerInventory.getItemFromIndex(count - 1)));
                 count++;
-            } else
+                UIManager.Instance.getUITooltip().OnChangeHotbar();
+            }
+            else
             {
                 hotbarSlot.removeQuantityNumber();
             }

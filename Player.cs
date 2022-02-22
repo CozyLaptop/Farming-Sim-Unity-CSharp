@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerInventory playerInventory;
+    private Inventory inventory;
     private Hotbar hotbar;
 
     private float baseSpeed = 5.0f;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = new PlayerInventory();
+        inventory = new Inventory();
         hotbar = GameObject.Find("Hotbar").GetComponent<Hotbar>();
     }
     void Start()
@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
             RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hitInfo.collider != null)
             {
-                if (Vector2.Distance(transform.position, hitInfo.transform.position) < 2)
+                if (Vector2.Distance(transform.position, hitInfo.transform.position) < 3)
                 {
                     if (hitInfo.transform.GetComponent<GroundPickableItem>())
                     {
@@ -116,11 +116,27 @@ public class Player : MonoBehaviour
                         pickupItem(id);
                         Destroy(hitInfo.transform.gameObject);
                     }
+                }
+                if (Vector2.Distance(transform.position, hitInfo.transform.position) < 6)
+                {
                     if (hitInfo.transform.GetComponent<ShippingBox>())
                     {
-
+                        try
+                        {
+                            //Add to shipping box inventory
+                            hitInfo.transform.GetComponent<ShippingBox>().getInventory().addToInventory(getEquippedItem(), 1);
+                            //Remove one from inventory
+                            inventory.removeOneFromInventory(getEquippedItem());
+                            //Update hotbar to reflect new amount
+                            hotbar.updateHotbar();
+                        }
+                        catch
+                        {
+                            Debug.Log("Could not add item because equipped slot doesnt contain an item");
+                        }
+                        //add to shipping box inventory
                         //currently equipped item will disapear from inventory
-                        //and go inside shipping box inventory
+
                     }
                 }
             }
@@ -137,10 +153,10 @@ public class Player : MonoBehaviour
     }
     private void pickupItem(int id)
     {
-        playerInventory.addToInventory(ItemManager.getItem(id), 1);
-        if (playerInventory.getInventoryList().Count <= 10)
+        inventory.addToInventory(ItemManager.getItem(id), 1);
+        if (inventory.getInventoryList().Count <= 10)
         {
-            hotbar.updateHotbar(playerInventory.getInventoryList(), playerInventory.getPlayerInventoryAmounts());
+            hotbar.updateHotbar();
         }
     }
     public Vector2 getPlayerPosition()
@@ -149,6 +165,14 @@ public class Player : MonoBehaviour
     }
     public Sprite getSpriteOfEquippedItem()
     {
-       return playerInventory.getSpriteFromIndex(hotbar.getActiveSlot());
+       return inventory.getSpriteFromIndex(hotbar.getActiveSlot());
+    }
+    public Item getEquippedItem()
+    {
+        return inventory.getItemFromIndex(hotbar.getActiveSlot());
+    }
+    public Inventory getInventory()
+    {
+        return inventory;
     }
 }

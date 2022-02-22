@@ -4,24 +4,12 @@ using UnityEngine;
 
 public class ShippingBox : MonoBehaviour
 {
-    List<Item> items;
-    Player player;
-
-    private void Start()
-    {
-        player = FindObjectOfType<Player>();
-        items = new List<Item>();
-    }
+    Inventory inventory;
     private void Awake()
     {
-        
+        inventory = new Inventory();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnMouseEnter()
     {
         UIManager.Instance.getUITooltip().gameObject.SetActive(true);
@@ -29,5 +17,9 @@ public class ShippingBox : MonoBehaviour
     private void OnMouseExit()
     {
         UIManager.Instance.getUITooltip().gameObject.SetActive(false);
+    }
+    public Inventory getInventory()
+    {
+        return inventory;
     }
 }

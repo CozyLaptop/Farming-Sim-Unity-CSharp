@@ -134,21 +134,26 @@ public class Player : MonoBehaviour
                         {
                             Debug.Log("Could not add item because equipped slot doesnt contain an item");
                         }
-                        //add to shipping box inventory
-                        //currently equipped item will disapear from inventory
-
                     }
                 }
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<DroppedItem>())
+
+    }
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        if (trigger.gameObject.GetComponent<DroppedItem>())
         {
-            DroppedItem droppedItem = collision.gameObject.GetComponent<DroppedItem>();
+            DroppedItem droppedItem = trigger.gameObject.GetComponent<DroppedItem>();
             pickupItem(droppedItem.id);
-            Destroy(collision.gameObject);
+            Destroy(trigger.gameObject);
+        }
+        if (trigger.gameObject.name == "door")
+        {
+            Debug.Log("You touched the door!");
         }
     }
     private void pickupItem(int id)

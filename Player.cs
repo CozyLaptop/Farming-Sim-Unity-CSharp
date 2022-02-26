@@ -145,16 +145,19 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D trigger)
     {
+        //If triggered by a drop item, pick it up
         if (trigger.gameObject.GetComponent<DroppedItem>())
         {
             DroppedItem droppedItem = trigger.gameObject.GetComponent<DroppedItem>();
             pickupItem(droppedItem.id);
             Destroy(trigger.gameObject);
         }
-        if (trigger.gameObject.name == "door")
-        {
-            Debug.Log("You touched the door!");
-        }
+        //If triggered by farmhouse door, ask to sleep
+        //if (trigger.gameObject.name == "door")
+        //{
+        //    //GameObject gameObject = GameObject.Find("TurnInMenu");
+        //    FindObjectOfType<TurnInMenu>().gameObject.SetActive(true);
+        //}
     }
     private void pickupItem(int id)
     {

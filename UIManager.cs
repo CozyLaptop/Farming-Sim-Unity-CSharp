@@ -22,12 +22,16 @@ public class UIManager : MonoBehaviour
     }
     //
     private GameObject uITooltip;
+    public GameObject turnInMenu;
+    //private GameObject turnInMenu;
 
     private void Awake()
     {
         _instance = this;
         uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiMouseTooltip"), new Vector3(0, 0, 0), Quaternion.identity);
         uITooltip.SetActive(false);
+
+        //turnInMenu = Instantiate(Resources.Load<GameObject>("Prefabs/UI/TurnInMenu"), new Vector3(0, 0, 0), Quaternion.identity);
     }
     private void Start()
     {

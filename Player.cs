@@ -123,8 +123,11 @@ public class Player : MonoBehaviour
                     {
                         try
                         {
+                            ShippingBox shippingBox = hitInfo.transform.GetComponent<ShippingBox>();
                             //Add to shipping box inventory
-                            hitInfo.transform.GetComponent<ShippingBox>().getInventory().addToInventory(getEquippedItem(), 1);
+                            shippingBox.getInventory().addToInventory(getEquippedItem(), 1);
+                            //Update shipping box amount
+                            shippingBox.updateShippingAmount(getEquippedItem().getSellingPrice());
                             //Remove one from inventory
                             inventory.removeOneFromInventory(getEquippedItem());
                             //Update hotbar to reflect new amount

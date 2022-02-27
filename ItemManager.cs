@@ -9,7 +9,7 @@ public static class ItemManager
 
     public static void initializeItemDatabase()
     {
-        itemDatabase.Add(1, new Item(1, "Salmonberry"));
+        itemDatabase.Add(1, new Item(1, "Salmonberry", 8));
     }
     public static Item getItem(int id)
     {

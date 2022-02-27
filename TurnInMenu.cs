@@ -10,10 +10,15 @@ public class TurnInMenu : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.pointerCurrentRaycast.gameObject.name == "Yes")
         {
-            Debug.Log(FindObjectOfType<ShippingBox>());
             //collect funds from shipping box
+            FindObjectOfType<Player>().addToGoldAndUpdateUI(FindObjectOfType<ShippingBox>().getValueOfItems());
+            //set shippingbox amount to 0;
+            FindObjectOfType<ShippingBox>().setValueTo0();
             //set day to next
             //grow plants
+
+            eventData.pointerCurrentRaycast.gameObject.GetComponent<MenuOption>().hideArrow();
+            eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.SetActive(false);
         }
         if (eventData.pointerCurrentRaycast.gameObject.name == "No")
         {

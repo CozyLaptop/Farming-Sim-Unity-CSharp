@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventory
 {
+    private int gold;
     private Dictionary<Item, int> inventoryDict;
     private List<Item> inventoryList;
 
@@ -11,6 +12,7 @@ public class Inventory
     {
         inventoryDict = new Dictionary<Item, int>();
         inventoryList = new List<Item>();
+        gold = 0;
     }
     public void addToInventory(Item item, int amount)
     {
@@ -80,6 +82,14 @@ public class Inventory
         {
             Debug.Log(item.getItemName());
         }
+    }
+    public void addGold(int gold)
+    {
+        this.gold += gold;
+    }
+    public int getGoldAmount()
+    {
+        return this.gold;
     }
 
 }

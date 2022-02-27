@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
                             //Add to shipping box inventory
                             shippingBox.getInventory().addToInventory(getEquippedItem(), 1);
                             //Update shipping box amount
-                            shippingBox.updateShippingAmount(getEquippedItem().getSellingPrice());
+                            shippingBox.addToShippingAmount(getEquippedItem().getSellingPrice());
                             //Remove one from inventory
                             inventory.removeOneFromInventory(getEquippedItem());
                             //Update hotbar to reflect new amount
@@ -185,5 +185,10 @@ public class Player : MonoBehaviour
     public Inventory getInventory()
     {
         return inventory;
+    }
+    public void addToGoldAndUpdateUI(int gold)
+    {
+        this.inventory.addGold(gold);
+        UIManager.Instance.updateGold(this.inventory.getGoldAmount());
     }
 }

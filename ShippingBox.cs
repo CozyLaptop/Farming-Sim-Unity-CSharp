@@ -29,12 +29,21 @@ public class ShippingBox : MonoBehaviour
     {
         return inventory;
     }
-    public void updateShippingAmount(int itemPrice)
+    public void addToShippingAmount(int itemPrice)
     {
         shippingAmount += itemPrice;
         textMeshPro.text = shippingAmount.ToString();
         GameObject _sellUI = Instantiate(sellUI, transform.position, Quaternion.identity);
         _sellUI.transform.parent = gameObject.transform;
         _sellUI.GetComponent<TextMeshPro>().text = itemPrice.ToString();
+    }
+    public int getValueOfItems()
+    {
+        return this.shippingAmount;
+    }
+    public void setValueTo0()
+    {
+        this.shippingAmount = 0;
+        textMeshPro.text = "0";
     }
 }

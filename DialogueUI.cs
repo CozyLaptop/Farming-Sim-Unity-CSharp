@@ -6,27 +6,33 @@ using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour, IPointerClickHandler
 {
-    Text dialogueText;
-    Image dialogueArrow;
-    Text yesText;
-    Text noText;
-
-    enum DialogueState{
+    enum DialogueState
+    {
         Continue,
         Decision
     }
+    DialogueState dialogueState;
+    Text dialogueText;
+    Image dialogueArrow;
+    Text yesText;
+    Image yesArrow;
+    Text noText;
+    Image noArrow;
+
+
     private void Awake()
     {
         dialogueText = transform.GetChild(0).GetComponent<Text>();
         dialogueArrow = dialogueText.transform.GetChild(0).GetComponent<Image>();
         yesText = transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        //yesArrow = transform.GetChild(1)
         noText = transform.GetChild(2).GetChild(0).GetComponent<Text>();
 
         setAllInactive();
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.pointerCurrentRaycast.gameObject.name == "Yes")
+        if (eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.name == "Yes")
         {
             //collect funds from shipping box
             FindObjectOfType<Player>().addToGoldAndUpdateUI(FindObjectOfType<ShippingBox>().getValueOfItems());
@@ -35,14 +41,18 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
             //set day to next
             //grow plants
 
-            eventData.pointerCurrentRaycast.gameObject.GetComponent<MenuOption>().hideArrow();
-            eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.SetActive(false);
+            eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.GetComponent<MenuOption>().hideArrow();
+            //eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.SetActive(false);
+
+            UIManager.Instance.getDialogueUI().gameObject.SetActive(false);
         }
-        if (eventData.pointerCurrentRaycast.gameObject.name == "No")
+        if (eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.name == "No")
         {
+            Debug.Log("Clicked on no");
             //hides arrow and disables window
-            eventData.pointerCurrentRaycast.gameObject.GetComponent<MenuOption>().hideArrow();
-            eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.SetActive(false);
+            eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.GetComponent<MenuOption>().hideArrow();
+
+            UIManager.Instance.getDialogueUI().gameObject.SetActive(false);
 
         }
     }
@@ -75,5 +85,13 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
     public void test()
     {
         Debug.Log("test test");
+    }
+    public void OnEnable()
+    {
+        Time.timeScale = 0;
+    }
+    public void OnDisable()
+    {
+        Time.timeScale = 1;
     }
 }

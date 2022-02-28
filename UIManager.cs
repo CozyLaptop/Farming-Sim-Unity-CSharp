@@ -43,11 +43,15 @@ public class UIManager : MonoBehaviour
     }
     public DialogueUI getDialogueUI()
     {
-        return dialogueUI.gameObject.GetComponent<DialogueUI>();
+        return dialogueUI.GetComponent<DialogueUI>();
     }
     public void updateGold(int gold)
     {
         moneyAndTimeUI.transform.GetChild(0).GetComponent<Text>().text = gold.ToString();
+    }
+    public void disableDialogueUI()
+    {
+        dialogueUI.GetComponent<DialogueUI>().setAllInactive();
     }
 
 }

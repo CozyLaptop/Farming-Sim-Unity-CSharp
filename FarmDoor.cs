@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class FarmDoor : MonoBehaviour
 {
-    public GameObject turnInMenu;
-    private void Awake()
+    private DialogueUI dialogueUI;
+    private void Start()
     {
 
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        turnInMenu.SetActive(true);
+        UIManager.Instance.getDialogueUI().setYesNoScript("Would you like to turn in for the day?", "Sleep", "No");
     }
     //public void hideMenu()
     //{

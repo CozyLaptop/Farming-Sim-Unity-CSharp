@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    private UIManager uIManager;
     private void Awake()
     {
         _instance = this;

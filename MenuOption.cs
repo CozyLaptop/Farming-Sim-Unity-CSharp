@@ -16,10 +16,10 @@ public class MenuOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void showArrow()
     {
-        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
     }
     public void hideArrow()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 }

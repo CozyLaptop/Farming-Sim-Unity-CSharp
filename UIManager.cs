@@ -23,24 +23,27 @@ public class UIManager : MonoBehaviour
         }
     }
     //
+    private GameObject UIElements;
     private GameObject uITooltip;
-    public GameObject turnInMenu;
     private GameObject moneyAndTimeUI;
-
+    private Transform dialogueUI;
+    //
     private void Awake()
     {
         _instance = this;
         uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiMouseTooltip"), new Vector3(0, 0, 0), Quaternion.identity);
         uITooltip.SetActive(false);
         moneyAndTimeUI = GameObject.Find("MoneyAndTime");
-    }
-    private void Start()
-    {
-        
+        dialogueUI = GameObject.Find("UIManager").transform.GetChild(1);
+        //
     }
     public UITooltip getUITooltip()
     {
         return uITooltip.GetComponent<UITooltip>();
+    }
+    public DialogueUI getDialogueUI()
+    {
+        return dialogueUI.gameObject.GetComponent<DialogueUI>();
     }
     public void updateGold(int gold)
     {

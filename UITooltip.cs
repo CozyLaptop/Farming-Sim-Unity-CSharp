@@ -23,7 +23,7 @@ public class UITooltip : MonoBehaviour
     }
     private void OnEnable()
     {
-        spriteRenderer.sprite = player.getSpriteOfEquippedItem();
+        //spriteRenderer.sprite = player.getSpriteOfEquippedItem();
     }
     public void OnChangeHotbar()
     {
@@ -33,7 +33,10 @@ public class UITooltip : MonoBehaviour
     {
         spriteRenderer.sprite = sprite;
     }
-    // Update is called once per frame
+    public void setSpriteToDialogue()
+    {
+        spriteRenderer.sprite = Resources.Load<Sprite>("UISPrites/dialogueSprite");
+    }
     void Update()
     {
         worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

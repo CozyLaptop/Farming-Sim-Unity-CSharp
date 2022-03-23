@@ -16,7 +16,7 @@ public class SeedMerchant : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        UIManager.Instance.getDialogueUI().setYesNoScript("Hey, it would really help me out if you bought some seeds." +
-            " I would like to open up a seed shop one of these days!", "Buy seeds", "No thanks");
+        UIManager.Instance.getDialogueUI().setYesNoScript("Hey, it would help me out if you bought some seeds." +
+            " I would really like to open up a shop one of these days.", "Buy seeds", "No thanks");
     }
 }

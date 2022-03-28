@@ -32,6 +32,7 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log(eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.name);
         if (eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.name == "Yes")
         {
             //collect funds from shipping box
@@ -81,10 +82,6 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
         dialogueArrow.gameObject.SetActive(false);
         yesText.gameObject.SetActive(false);
         noText.gameObject.SetActive(false);
-    }
-    public void test()
-    {
-        Debug.Log("test test");
     }
     public void OnEnable()
     {

@@ -31,7 +31,10 @@ public class SeedMerchant : MonoBehaviour
                 UIManager.Instance.activateSeedShop();
                 waitingForResponse = false;
             }
-
+            if(UIManager.Instance.getResponse() == "No")
+            {
+                UIManager.Instance.disableDialogueUI();
+            }
         }
     }
 }

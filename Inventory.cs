@@ -75,6 +75,18 @@ public class Inventory
             return Resources.Load<Sprite>("ItemSprites/emptySprite");
         }
     }
+    public bool hasItemAtIndex(int index)
+    {
+        try
+        {
+            return (inventoryList[index] != null);
+        }
+
+        catch
+        {
+            return false;
+        }
+    }
     public void showInventory()
     {
         for(int i = 0; i < inventoryList.Count; i++)

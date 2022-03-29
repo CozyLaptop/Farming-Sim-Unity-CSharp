@@ -40,26 +40,34 @@ public class Hotbar : MonoBehaviour
     public void updateHotbar()
     {
         //playerInventory.getInventoryList().Count;
-        int count = 1;
+        int count = 0;
         foreach (HotbarSlot hotbarSlot in GetComponentsInChildren<HotbarSlot>())
         {
-            if(playerInventory.getItemCount() == 0)
+            if (playerInventory.hasItemAtIndex(count))
+            {
+                hotbarSlot.setSprite(playerInventory.getSpriteFromIndex(count));
+                hotbarSlot.setQuantity(playerInventory.getIndividualItemCount(playerInventory.getItemFromIndex(count)));
+                UIManager.Instance.getUITooltip().OnChangeHotbar();
+
+            } else
             {
                 hotbarSlot.setSpriteToNone();
                 hotbarSlot.removeQuantityNumber();
                 UIManager.Instance.getUITooltip().OnChangeHotbar();
+
             }
-            if (playerInventory.getItemCount() >= count)
-            {
-                hotbarSlot.setSprite(playerInventory.getSpriteFromIndex(count - 1));
-                hotbarSlot.setQuantity(playerInventory.getIndividualItemCount(playerInventory.getItemFromIndex(count - 1)));
-                count++;
-                UIManager.Instance.getUITooltip().OnChangeHotbar();
-            }
-            else
-            {
-                hotbarSlot.removeQuantityNumber();
-            }
+            count++;
+            //    if(playerInventory.getItemCount() == 0)
+            //    {
+            //        hotbarSlot.removeQuantityNumber();
+            //    }
+            //    if (playerInventory.getItemCount() >= count)
+            //    {
+            //        count++;
+            //    }
+            //    else
+            //    {
+            //    }
         }
     }
     public void updateHotbarSlotAmount(int index, Item item)

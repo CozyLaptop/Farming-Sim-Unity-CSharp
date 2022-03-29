@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SeedMerchant : MonoBehaviour
 {
+    private bool waitingForResponse;
     // Start is called before the first frame update
     private void OnMouseOver()
     {
@@ -16,7 +17,21 @@ public class SeedMerchant : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        
         UIManager.Instance.getDialogueUI().setYesNoScript("Hey, it would help me out if you bought some seeds." +
             " I would really like to open up a shop one of these days.", "Buy seeds", "No thanks");
+        waitingForResponse = true;
+    }
+    private void Update()
+    {
+        if (waitingForResponse)
+        {
+            if(UIManager.Instance.getResponse() == "Yes")
+            {
+                UIManager.Instance.activateSeedShop();
+                waitingForResponse = false;
+            }
+
+        }
     }
 }

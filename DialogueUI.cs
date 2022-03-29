@@ -35,26 +35,11 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
         Debug.Log(eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.name);
         if (eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.name == "Yes")
         {
-            //collect funds from shipping box
-            FindObjectOfType<Player>().addToGoldAndUpdateUI(FindObjectOfType<ShippingBox>().getValueOfItems());
-            //set shippingbox amount to 0;
-            FindObjectOfType<ShippingBox>().setValueTo0();
-            //set day to next
-            //grow plants
-
-            eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.GetComponent<MenuOption>().hideArrow();
-            //eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.SetActive(false);
-
-            UIManager.Instance.getDialogueUI().gameObject.SetActive(false);
+            UIManager.Instance.setResponse("Yes");
         }
         if (eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.name == "No")
         {
-            Debug.Log("Clicked on no");
-            //hides arrow and disables window
-            eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject.GetComponent<MenuOption>().hideArrow();
-
-            UIManager.Instance.getDialogueUI().gameObject.SetActive(false);
-
+            UIManager.Instance.setResponse("No");
         }
     }
     public void setContinueScript()
@@ -64,6 +49,7 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
     }
     public void setYesNoScript(string dialogue, string yes, string no)
     {
+        UIManager.Instance.setResponse("Waiting");
         gameObject.SetActive(true);
 
         this.dialogueText.gameObject.SetActive(true);
@@ -82,6 +68,8 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
         dialogueArrow.gameObject.SetActive(false);
         yesText.gameObject.SetActive(false);
         noText.gameObject.SetActive(false);
+        //disable yes arrow
+        //disable no arrow
     }
     public void OnEnable()
     {
@@ -90,5 +78,7 @@ public class DialogueUI : MonoBehaviour, IPointerClickHandler
     public void OnDisable()
     {
         Time.timeScale = 1;
+        transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(2).GetChild(1).gameObject.SetActive(false);
     }
 }

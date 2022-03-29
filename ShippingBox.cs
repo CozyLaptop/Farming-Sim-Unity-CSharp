@@ -15,7 +15,6 @@ public class ShippingBox : MonoBehaviour
         textMeshPro = transform.GetComponentInChildren<TextMeshPro>();
         textMeshPro.text = shippingAmount.ToString();
         sellUI = Resources.Load<GameObject>("Prefabs/UI/ShippingBoxSellUI");
-        //textMeshPro.text = "test";
     }
     private void OnMouseEnter()
     {

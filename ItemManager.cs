@@ -11,6 +11,7 @@ public static class ItemManager
     {
         itemDatabase.Add(1, new Item(1, "Salmonberry", 8));
         itemDatabase.Add(212, new Item(212, "tomatoSeed", 10));
+        itemDatabase.Add(1111, new Item(1111, "oldHoe", 20));
     }
     public static Item getItem(int id)
     {

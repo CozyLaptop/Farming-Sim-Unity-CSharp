@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,11 +23,24 @@ public class UIManager : MonoBehaviour
 
         }
     }
+    private enum Response
+    {
+        Yes,
+        No,
+        Continue,
+        Cancel,
+        None,
+        Waiting
+    };
     //
     private GameObject UIElements;
     private GameObject uITooltip;
     private GameObject moneyAndTimeUI;
     private Transform dialogueUI;
+    private GameObject shopUI;
+    private Response response;
+
+
     //
     private void Awake()
     {
@@ -34,8 +48,10 @@ public class UIManager : MonoBehaviour
         uITooltip = Instantiate(Resources.Load<GameObject>("Prefabs/UI/uiMouseTooltip"), new Vector3(0, 0, 0), Quaternion.identity);
         uITooltip.SetActive(false);
         moneyAndTimeUI = GameObject.Find("MoneyAndTime");
-        dialogueUI = GameObject.Find("UIManager").transform.GetChild(1);
-        //
+        dialogueUI = transform.GetChild(1);
+        shopUI = transform.GetChild(3).gameObject;
+        response = (Response)Enum.Parse(typeof(Response), "None");
+
     }
     public UITooltip getUITooltip()
     {
@@ -51,7 +67,23 @@ public class UIManager : MonoBehaviour
     }
     public void disableDialogueUI()
     {
-        dialogueUI.GetComponent<DialogueUI>().setAllInactive();
+        dialogueUI.gameObject.SetActive(false);
     }
-
+    public string getResponse()
+    {
+        return response.ToString();
+    }
+    public void setResponse(string response)
+    {
+        this.response = (Response)Enum.Parse(typeof(Response), response);
+    }
+    public void activateSeedShop()
+    {
+        dialogueUI.gameObject.SetActive(false);
+        shopUI.SetActive(true);
+    }
+    public void deactivateSeedShop()
+    {
+        shopUI.SetActive(false);
+    }
 }

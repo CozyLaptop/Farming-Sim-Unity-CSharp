@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -67,142 +68,6 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        string currentSpriteName = spriteRenderer.sprite.name;
-        if (lastSpriteName != currentSpriteName)
-        {
-            Transform equippedItemTransform = transform.GetChild(1);
-            SpriteRenderer equippedItemGameobjectSpriteRenderer = transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
-
-            switch (currentSpriteName)
-            {
-                case "farmerright_0":
-                case "farmerright_4":
-                    equippedItemTransform.localPosition = new Vector3(-0.38f, 0.76f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerright_1":
-                case "farmerright_3":
-                    equippedItemTransform.localPosition = new Vector3(-0.26f, 0.76f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerright_2":
-                    equippedItemTransform.localPosition = new Vector3(-0.1f, 0.88f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerright_5":
-                case "farmerright_7":
-                    equippedItemTransform.localPosition = new Vector3(-0.44f, 0.76f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerright_6":
-                    equippedItemTransform.localPosition = new Vector3(-0.44f, 0.82f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                    //
-                case "farmerup_0":
-                case "farmerup_4":
-                    equippedItemTransform.localPosition = new Vector3(0.43f, 0.57f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
-                    break;
-                case "farmerup_1":
-                case "farmerup_3":
-                    equippedItemTransform.localPosition = new Vector3(0.4f, 0.66f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
-                    break;
-                case "farmerup_2":
-                    equippedItemTransform.localPosition = new Vector3(0.34f, 0.7f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
-                    break;
-                case "farmerup_5":
-                case "farmerup_7":
-                    equippedItemTransform.localPosition = new Vector3(0.43f, 0.61f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
-                    break;
-                case "farmerup_6":
-                    equippedItemTransform.localPosition = new Vector3(0.43f, 0.67f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
-                    break;
-                //
-                case "farmerleft_0":
-                case "farmerleft_4":
-                    equippedItemTransform.localPosition = new Vector3(-0.17f, 0.82f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerleft_1":
-                case "farmerleft_3":
-                    equippedItemTransform.localPosition = new Vector3(-0.05f, 0.82f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
-                    break;
-                case "farmerleft_2":
-                    equippedItemTransform.localPosition = new Vector3(0.02f, 0.88f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
-                    break;
-                case "farmerleft_5":
-                case "farmerleft_7":
-                    equippedItemTransform.localPosition = new Vector3(-0.23f, 0.76f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerleft_6":
-                    equippedItemTransform.localPosition = new Vector3(-0.27f, 0.82f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                //
-                case "farmerdown_0":
-                case "farmerdown_4":
-                    equippedItemTransform.localPosition = new Vector3(-0.4f, 0.75f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerdown_1":
-                case "farmerdown_3":
-                    equippedItemTransform.localPosition = new Vector3(-0.4f, 0.82f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerdown_2":
-                    equippedItemTransform.localPosition = new Vector3(-0.4f, 1f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerdown_5":
-                case "farmerdown_7":
-                    equippedItemTransform.localPosition = new Vector3(-0.37f, 0.73f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                case "farmerdown_6":
-                    equippedItemTransform.localPosition = new Vector3(-0.3f, 0.77f, 0.0f);
-                    equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
-                    equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
-                    break;
-                    //
-            }
-        }
-        lastSpriteName = currentSpriteName;
-
-        if (equippedItem != null)
-        {
-            if(equippedItem.getItemName() == "oldHoe")
-            {
-
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             processNumPress(1);
@@ -244,46 +109,141 @@ public class Player : MonoBehaviour
             processNumPress(0);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (equippedItem != null)
         {
-
-            RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hitInfo.collider != null)
+            if (equippedItem.getItemName() == "oldHoe")
             {
-                if (Vector2.Distance(transform.position, hitInfo.transform.position) < 3)
+                string currentSpriteName = spriteRenderer.sprite.name;
+                if (lastSpriteName != currentSpriteName)
                 {
-                    Debug.Log(hitInfo.transform.name);
-                    if (hitInfo.transform.GetComponent<GroundPickableItem>())
+                    Transform equippedItemTransform = transform.GetChild(1);
+                    SpriteRenderer equippedItemGameobjectSpriteRenderer = transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
+
+                    switch (currentSpriteName)
                     {
-                        int id = hitInfo.transform.GetComponent<GroundPickableItem>().id;
-                        pickupItem(id);
-                        Destroy(hitInfo.transform.gameObject);
+                        case "farmerright_0":
+                        case "farmerright_4":
+                            equippedItemTransform.localPosition = new Vector3(-0.38f, 0.76f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerright_1":
+                        case "farmerright_3":
+                            equippedItemTransform.localPosition = new Vector3(-0.26f, 0.76f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerright_2":
+                            equippedItemTransform.localPosition = new Vector3(-0.1f, 0.88f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerright_5":
+                        case "farmerright_7":
+                            equippedItemTransform.localPosition = new Vector3(-0.44f, 0.76f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerright_6":
+                            equippedItemTransform.localPosition = new Vector3(-0.44f, 0.82f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        //
+                        case "farmerup_0":
+                        case "farmerup_4":
+                            equippedItemTransform.localPosition = new Vector3(0.43f, 0.57f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        case "farmerup_1":
+                        case "farmerup_3":
+                            equippedItemTransform.localPosition = new Vector3(0.4f, 0.66f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        case "farmerup_2":
+                            equippedItemTransform.localPosition = new Vector3(0.34f, 0.7f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        case "farmerup_5":
+                        case "farmerup_7":
+                            equippedItemTransform.localPosition = new Vector3(0.43f, 0.61f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        case "farmerup_6":
+                            equippedItemTransform.localPosition = new Vector3(0.43f, 0.67f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 121f, 2f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        //
+                        case "farmerleft_0":
+                        case "farmerleft_4":
+                            equippedItemTransform.localPosition = new Vector3(-0.17f, 0.82f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerleft_1":
+                        case "farmerleft_3":
+                            equippedItemTransform.localPosition = new Vector3(-0.05f, 0.82f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        case "farmerleft_2":
+                            equippedItemTransform.localPosition = new Vector3(0.02f, 0.88f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        case "farmerleft_5":
+                        case "farmerleft_7":
+                            equippedItemTransform.localPosition = new Vector3(-0.23f, 0.76f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerleft_6":
+                            equippedItemTransform.localPosition = new Vector3(-0.27f, 0.82f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        //
+                        case "farmerdown_0":
+                        case "farmerdown_4":
+                            equippedItemTransform.localPosition = new Vector3(-0.4f, 0.75f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerdown_1":
+                        case "farmerdown_3":
+                            equippedItemTransform.localPosition = new Vector3(-0.4f, 0.82f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerdown_2":
+                            equippedItemTransform.localPosition = new Vector3(-0.4f, 1f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerdown_5":
+                        case "farmerdown_7":
+                            equippedItemTransform.localPosition = new Vector3(-0.37f, 0.73f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerdown_6":
+                            equippedItemTransform.localPosition = new Vector3(-0.3f, 0.77f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                            //
                     }
                 }
-                if (Vector2.Distance(transform.position, hitInfo.transform.position) < 6)
-                {
-                    if (hitInfo.transform.GetComponent<ShippingBox>())
-                    {
-                        try
-                        {
-                            ShippingBox shippingBox = hitInfo.transform.GetComponent<ShippingBox>();
-                            //Add to shipping box inventory
-                            shippingBox.getInventory().addToInventory(getEquippedItem(), 1);
-                            //Update shipping box amount
-                            shippingBox.addToShippingAmount(getEquippedItem().getSellingPrice());
-                            //Remove one from inventory
-                            inventory.removeOneFromInventory(getEquippedItem());
-                            //Update hotbar to reflect new amount
-                            hotbar.updateHotbar();
-                        }
-                        catch
-                        {
-                            Debug.Log("Could not add item because equipped slot doesnt contain an item");
-                        }
-                    }
-                }
+                lastSpriteName = currentSpriteName;
             }
         }
+        
+        
     }
     private void OnTriggerEnter2D(Collider2D trigger)
     {
@@ -295,7 +255,7 @@ public class Player : MonoBehaviour
             Destroy(trigger.gameObject);
         }
     }
-    private void pickupItem(int id)
+    public void pickupItem(int id)
     {
         inventory.addToInventory(ItemManager.getItem(id), 1);
         if (inventory.getInventoryList().Count <= 10)
@@ -307,10 +267,17 @@ public class Player : MonoBehaviour
     {
         hotbar.toggleActiveSlot(num);
         equippedItem = inventory.getItemFromIndex(num - 1);
-        if(equippedItem.getItemName() == "oldHoe")
+        if(equippedItem != null)
         {
-            transform.GetChild(1).gameObject.SetActive(true);
-        } else transform.GetChild(1).gameObject.SetActive(false);
+            if (equippedItem.getItemName() == "oldHoe")
+            {
+                transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else
+            {
+                transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
     }
     public Vector2 getPlayerPosition()
     {

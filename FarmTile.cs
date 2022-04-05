@@ -15,9 +15,7 @@ public class FarmTile : Tile
 
     public void setTopObject(GameObject topObject)
     {
-        this.topObject = topObject;
-        Debug.Log("Instantiating at " + vector3Pos);
-        topObject = Instantiate(topObject, vector3Pos, Quaternion.identity);
+        this.topObject = Instantiate(topObject, vector3Pos, Quaternion.identity);
     }
 
     public Vector3Int getPos()
@@ -31,5 +29,22 @@ public class FarmTile : Tile
     public Vector3Int getVector3Int()
     {
         return vector3Pos;
+    }
+    public void setSprite(Sprite sprite)
+    {
+        this.sprite = sprite;
+    }
+    public override void RefreshTile(Vector3Int position, ITilemap tilemap)
+    {
+        base.RefreshTile(position, tilemap);
+    }
+    public bool isTilled()
+    {
+        sprite = Resources.Load<Sprite>("TileSprites/tilledSoil");
+        return tilled;
+    }
+    public void setTilled(bool tilled)
+    {
+        this.tilled = tilled;
     }
 }

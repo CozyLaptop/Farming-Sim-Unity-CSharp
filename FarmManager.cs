@@ -11,19 +11,19 @@ public class FarmManager : MonoBehaviour
     public GameObject tree1;
     private void Awake()
     {
-        //Get grid and tilemap ready
-        grid = FindObjectOfType<Grid>();
-        List <Tilemap> tilemaps = new List<Tilemap>(grid.gameObject.GetComponentsInChildren<Tilemap>());
-        groundTilemap = tilemaps[0];
 
-        //Setup item database
-        ItemManager.initializeItemDatabase();
-
-        //Spawn random objects on the farm
-        spawnFarm();
     }
     private void Start()
     {
+        //Get grid and tilemap ready
+        //grid = FindObjectOfType<Grid>();
+        //List<Tilemap> tilemaps = new List<Tilemap>(grid.gameObject.GetComponentsInChildren<Tilemap>());
+        //groundTilemap = tilemaps[0];
+
+        //Setup item database
+
+        //Spawn random objects on the farm
+        spawnFarm();
     }
     private void spawnFarm()
     {
@@ -33,11 +33,7 @@ public class FarmManager : MonoBehaviour
             TileBase tile = groundTilemap.GetTile(position);
             if(tile.name == "soil")
             {
-                int randomNum = UnityEngine.Random.Range(0, 100);
-                if(randomNum <= 15)
-                {
-                    Instantiate(tree1, grid.GetCellCenterWorld(position), Quaternion.identity);
-                }
+
             }
         }
     }

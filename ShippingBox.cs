@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShippingBox : MonoBehaviour
 {
-    public GameObject sellUI;
+    private GameObject sellUI;
     TextMeshPro textMeshPro;
     int shippingAmount = 0;
     Inventory inventory;
@@ -23,6 +23,27 @@ public class ShippingBox : MonoBehaviour
     private void OnMouseExit()
     {
         UIManager.Instance.getUITooltip().gameObject.SetActive(false);
+    }
+    private void OnMouseDown()
+    {
+        try
+        {
+            Player player = FindObjectOfType<Player>();
+            //ShippingBox shippingBox = GetComponent<ShippingBox>();
+            //Add to shipping box inventory
+            inventory.addToInventory(player.getEquippedItem(), 1);
+            //Update shipping box amount
+            addToShippingAmount(player.getEquippedItem().getSellingPrice());
+            //Remove one from inventory
+            player.getInventory().removeOneFromInventory(player.getEquippedItem());
+            //Update hotbar to reflect new amount
+            Hotbar hotbar = FindObjectOfType<Hotbar>();
+            hotbar.updateHotbar();
+        }
+        catch
+        {
+            Debug.Log("Could not add item because equipped slot doesnt contain an item");
+        }
     }
     public Inventory getInventory()
     {

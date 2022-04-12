@@ -22,17 +22,16 @@ public class FarmTiles : MonoBehaviour
                 tilemap.SetTile(tilePos, ft);
                 ft = (FarmTile) tilemap.GetTile(tilePos);
                 ft.setVector3IntPos(tilePos);
-                ft.setSprite(Resources.Load<Sprite>("TileSprites/soil"));
                 ft.setTilled(false);
                 ft.name = ft.getVector3Int().x + ", " + ft.getVector3Int().y;
 
+                //Spawn objects on farm
                 int randomNum = UnityEngine.Random.Range(0, 100);
-                if (randomNum <= 15)
+                if (randomNum <= 10)
                 {
                     ft.setTopObject(Resources.Load<GameObject>("Prefabs/tree1"));
                 }
             }
-            tilemap.RefreshTile(tilePos);
         }
     }
 

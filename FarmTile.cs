@@ -40,11 +40,19 @@ public class FarmTile : Tile
     }
     public bool isTilled()
     {
-        sprite = Resources.Load<Sprite>("TileSprites/tilledSoil");
         return tilled;
     }
     public void setTilled(bool tilled)
     {
         this.tilled = tilled;
+        if (tilled)
+        {
+            sprite = Resources.Load<Sprite>("TileSprites/tilledSoil");
+        } else
+        {
+            sprite = Resources.Load<Sprite>("TileSprites/soil");
+        }
+        Tilemap tilemap = FindObjectOfType<FarmTiles>().getTilemap();
+        tilemap.RefreshTile(this.vector3Pos);
     }
 }

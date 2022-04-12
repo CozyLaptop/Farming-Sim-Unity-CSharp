@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +17,14 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector2 playerPosition;
     private string lastSpriteName;
-    private Sprite currentSprite;
+    private string currentSpriteName;
 
     private Rigidbody2D rb;
     private Animator anim;
+    private bool attacking;
     private bool playerMoving;
     private Vector2 lastMove;
+
 
     private void Awake()
     {
@@ -66,8 +69,57 @@ public class Player : MonoBehaviour
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);
     }
+    public void setTileInFrontOfPlayerToTilled()
+    {
+        Tilemap tilemap = GameManager.Instance.getFarmTiles().getTilemap();
+        FarmTile farmTileInFrontOfPlayer;
+        switch (currentSpriteName)
+        {
+            case "farmerattackright_1":
+                if (tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x + 1, transform.position.y, 0))).GetType() == typeof(FarmTile))
+                {
+                    farmTileInFrontOfPlayer = (FarmTile)tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x + 1, transform.position.y, 0)));
+                    farmTileInFrontOfPlayer.setTilled(true);
+                }
+                break;
+            case "farmerattackleft_1":
+                if (tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x - 1, transform.position.y, 0))).GetType() == typeof(FarmTile))
+                {
+                    farmTileInFrontOfPlayer = (FarmTile)tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x - 1, transform.position.y, 0)));
+                    farmTileInFrontOfPlayer.setTilled(true);
+                }
+                break;
+            case "farmerattackdown_1":
+                if (tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x, transform.position.y - 1, 0))).GetType() == typeof(FarmTile))
+                {
+                    farmTileInFrontOfPlayer = (FarmTile)tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x, transform.position.y - 1, 0)));
+                    farmTileInFrontOfPlayer.setTilled(true);
+                }
+                break;
+            case "farmerattackup_1":
+                if (tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x, transform.position.y + 1, 0))).GetType() == typeof(FarmTile))
+                {
+                    farmTileInFrontOfPlayer = (FarmTile)tilemap.GetTile(tilemap.WorldToCell(new Vector3(transform.position.x, transform.position.y + 1, 0)));
+                    farmTileInFrontOfPlayer.setTilled(true);
+                }
+                break;
+        }
+
+    }
     private void Update()
     {
+        currentSpriteName = spriteRenderer.sprite.name;
+
+        if (attacking)
+        {
+            if(currentSpriteName == "farmerattackright_1" || currentSpriteName == "farmerattackleft_1"
+                || currentSpriteName == "farmerattackup_1" || currentSpriteName == "farmerattackdown_1")
+            {
+                setTileInFrontOfPlayerToTilled();
+                attacking = false;
+                anim.SetBool("Attacking", false);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             processNumPress(1);
@@ -111,9 +163,6 @@ public class Player : MonoBehaviour
 
         if (equippedItem != null)
         {
-            if (equippedItem.getItemName() == "oldHoe")
-            {
-                string currentSpriteName = spriteRenderer.sprite.name;
                 if (lastSpriteName != currentSpriteName)
                 {
                     Transform equippedItemTransform = transform.GetChild(1);
@@ -236,14 +285,57 @@ public class Player : MonoBehaviour
                             equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -80f);
                             equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
                             break;
-                            //
+                        //
+                        //
+                        //
+                        case "farmerattackright_0":
+                            equippedItemTransform.localPosition = new Vector3(-0.17f, 1.3f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 0f, 7.22f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        case "farmerattackright_1":
+                            equippedItemTransform.localPosition = new Vector3(0.36f, 1f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 0f, -142.17f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                            break;
+                        //
+                        case "farmerattackleft_0":
+                            equippedItemTransform.localPosition = new Vector3(-0.17f, 1.3f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 180f, 7.22f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                        break;
+                        case "farmerattackleft_1":
+                            equippedItemTransform.localPosition = new Vector3(-0.42f, 1f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 180f, -142.17f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                        break;
+                    //
+                        case "farmerattackdown_0":
+                            equippedItemTransform.localPosition = new Vector3(-0.34f, 1.32f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 45f, -19.7f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                        break;
+                        case "farmerattackdown_1":
+                            equippedItemTransform.localPosition = new Vector3(-0.148f, 0.64f, 0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 135f, 159f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 1;
+                        break;
+                    //
+                        case "farmerattackup_0":
+                            equippedItemTransform.localPosition = new Vector3(.1f, 1.45f, 0.0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 135f, 0f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+                        case "farmerattackup_1":
+                            equippedItemTransform.localPosition = new Vector3(0f, 1.13f, 0f);
+                            equippedItemTransform.eulerAngles = new Vector3(0f, 135f, 180f);
+                            equippedItemGameobjectSpriteRenderer.sortingOrder = 0;
+                            break;
+
                     }
                 }
                 lastSpriteName = currentSpriteName;
-            }
         }
-        
-        
     }
     private void OnTriggerEnter2D(Collider2D trigger)
     {
@@ -303,5 +395,18 @@ public class Player : MonoBehaviour
     public void setEquippedItem(Item item)
     {
         this.equippedItem = item;
+    }
+
+    public void useLeftClick()
+    {
+        if (equippedItem.getItemName() == "oldHoe")
+        {
+            useTool();
+        }
+    }
+    private void useTool()
+    {
+        attacking = true;
+        anim.SetBool("Attacking", attacking);
     }
 }

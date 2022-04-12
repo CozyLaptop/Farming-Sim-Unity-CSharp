@@ -63,7 +63,11 @@ public class Inventory
     }
     public Item getItemFromIndex(int index)
     {
-        return inventoryList[index];
+        if (hasItemAtIndex(index))
+        {
+            return inventoryList[index];
+        }
+        else return null;
     }
     public Sprite getSpriteFromIndex(int index)
     {

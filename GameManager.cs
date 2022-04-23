@@ -40,22 +40,9 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int tilePos = farmTiles.getTilemap().WorldToCell(worldPoint);
-
             player.useLeftClick();
 
-            //if(farmTiles.getTile(tilePos).GetType() == typeof(FarmTile))
-            //{
-            //    FarmTile clickedFarmTile = (FarmTile) farmTiles.getTile(tilePos);
-            //    if (!clickedFarmTile.isTilled() && player.getEquippedItem().getItemName() == "oldHoe")
-            //    {
-            //        clickedFarmTile.setTilled(true);
-            //        farmTiles.getTilemap().RefreshTile(tilePos);
-            //    }
-            //}
-            TileBase tile = farmTiles.getTile(tilePos);
+            RaycastHit2D hitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
             if (hitInfo.collider != null)
             {
